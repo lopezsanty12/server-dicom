@@ -1,0 +1,28 @@
+{
+  "Name": "OrthancTest",
+  "RemoteAccessAllowed": true,
+  "DicomAet": "ORTHANC",
+  "DicomPort": 4242,
+  "HttpPort": 8042,
+  "AuthenticationEnabled": true,
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "RegisteredUsers": {
+    "admin": "admin123"
+  },
+  "DefaultEncoding": "Latin1",
+  "PostgreSQL" : {
+    "EnableIndex" : true,
+    "EnableStorage" : false,
+    "Host" : "orthanc-db",
+    "Port" : 5432,
+    "Database" : "orthanc",
+    "Username" : "orthanc",
+    "Password" : "orthanc"
+  },
+  "Plugins": [
+    "/usr/local/share/orthanc/plugins"
+  ],
+  "Authorization": {
+    "CheckedLevel": "studies"
+  }
+}

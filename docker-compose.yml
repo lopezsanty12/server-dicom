@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  orthanc-db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: orthanc
+      POSTGRES_USER: orthanc
+      POSTGRES_PASSWORD: orthanc
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+
+  orthanc:
+    image: jodogne/orthanc-plugins
+    restart: always
+    depends_on:
+      - orthanc-db
+    ports:
+      - "8042:8042"   # Web UI / REST API
+      - "4242:4242"   # DICOM port
+    volumes:
+      - ./orthanc/config/orthanc.json:/etc/orthanc/orthanc.json
+      - ./orthanc/dicomImages:/var/lib/orthanc/db
+    environment:
+      PGHOST: orthanc-db
+      PGPORT: 5432
+      PGDATABASE: orthanc
+      PGUSER: orthanc
+      PGPASSWORD: orthanc
