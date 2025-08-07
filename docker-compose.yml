@@ -10,22 +10,29 @@ services:
       POSTGRES_PASSWORD: orthanc
     volumes:
       - ./postgres/data:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
 
-  orthanc:
+  orthanc-a:
+    container_name: orthanc-a
     image: jodogne/orthanc-plugins
     restart: always
     depends_on:
       - orthanc-db
     ports:
-      - "8042:8042"   # Web UI / REST API
-      - "4242:4242"   # DICOM port
+      - "8042:8042"
+      - "4242:4242"
     volumes:
-      - ./orthanc/config/orthanc.json:/etc/orthanc/orthanc.json:ro
+      - ./orthanc/config/orthanc_a.json:/etc/orthanc/orthanc.json:ro
       - ./orthanc/dicomImages:/var/lib/orthanc/db
-      - ./orthanc/worklists:/var/lib/orthanc/worklists
-    environment:
-      PGHOST: orthanc-db
-      PGPORT: 5432
-      PGDATABASE: orthanc
-      PGUSER: orthanc
-      PGPASSWORD: orthanc
+  
+  orthanc-b:
+    container_name: orthanc-b
+    image: jodogne/orthanc-plugins
+    restart: always
+    depends_on:
+      - orthanc-db
+    ports:
+      - "8043:8042"
+      - "4243:4242"
+    volumes:
+      - ./orthanc/config/orthanc_b.json:/etc/orthanc/orthanc.json:ro

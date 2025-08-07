@@ -1,7 +1,7 @@
 {
-  "Name": "OrthancTest",
+  "Name": "Orthanc-A",
   "RemoteAccessAllowed": true,
-  "DicomAet": "ORTHANC",
+  "DicomAet": "ORTHANCA",
   "DicomPort": 4242,
   "HttpPort": 8042,
   "AuthenticationEnabled": true,
@@ -9,7 +9,17 @@
   "RegisteredUsers": {
     "admin": "admin123"
   },
-  "DefaultEncoding": "Latin1",
+    "RegisteredAETs": {
+    "ORTHANCB": [ "orthanc-b", 4242 ]
+  },
+  "OrthancPeers": {
+    "PeerB": {
+      "Url": "http://orthanc-b:8042/",
+      "Username": "orthanc",
+      "Password": "orthanc"
+    }
+  },
+  "SslEnabled": false,
   "PostgreSQL" : {
     "EnableIndex" : true,
     "EnableStorage" : false,

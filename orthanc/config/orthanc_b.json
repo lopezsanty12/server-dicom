@@ -1,0 +1,30 @@
+{
+    "Name": "Orthanc-B",
+    "DicomAet": "ORTHANCB",
+    "RemoteAccessAllowed": true,
+    "RegisteredAETs": {
+        "ORTHANCA": [ "orthanc-a", 4242 ]
+    },
+    "OrthancPeers": {
+        "PeerA": {
+            "Url": "http://orthanc-a:8042/",
+            "Username": "admin",
+            "Password": "admin123"
+        }
+    },
+    "SslEnabled": false,
+    "Plugins": [
+        "/usr/local/share/orthanc/plugins"
+    ],
+    "PostgreSQL" : {
+    "EnableIndex" : true,
+    "EnableStorage" : false,
+    "Host" : "orthanc-db",
+    "Port" : 5432,
+    "Database" : "orthanc_b",
+    "Username" : "orthanc",
+    "Password" : "orthanc",
+    "Index": "True",
+    "Storage": "True"
+  }
+}
